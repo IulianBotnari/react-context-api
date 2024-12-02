@@ -8,15 +8,14 @@ export function GlobalContext({ children }) {
     const [searchData, setSearchData] = useState('')
 
 
-    const handleSearch = (e => {
+    const handleSearch = (e) => {
 
         setSearchData(e.target.value)
-    })
+    }
 
 
     const value = {
         handleSearch,
-        setSearchData,
         searchData,
     }
 

@@ -2,7 +2,7 @@ import Style from './AppSearch.module.css'
 import { useContext, useState } from 'react'
 
 import AppPost from '../AppPost/AppPost'
-import React from 'react'
+// import React from 'react'
 import { useGlobalContext } from '../../Context/GlobalContext'
 
 
@@ -16,7 +16,6 @@ export default function AppSearch() {
     // }
     const {
         handleSearch,
-        setSearchData,
         searchData,
     } = useGlobalContext()
 

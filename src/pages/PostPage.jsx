@@ -4,29 +4,47 @@ import { useEffect, useState } from "react"
 
 export default function PostPage() {
 
-    const [post, setPost] = useState([])
+    const [posts, setPosts] = useState([])
+    const [nextPost, setNextPost] = useState({})
     const { id } = useParams();
-    console.log(id);
+
 
     "127.0.0.1:3000/posts/$:" + id
 
 
-
+    const [indexOfSelectedPost, setIndexOfSelectedPost] = useState(id)
 
     async function fetchPost() {
         try {
 
-            const response = await fetch(`http://127.0.0.1:3000/posts/${id}`)
+            const response = await fetch(`http://127.0.0.1:3000/posts/`)
 
             const data = await response.json()
-            setPost(data.data)
-            console.log(data.data);
+
+            const index = data.findIndex(elemnt => elemnt.id === id)
+            console.log(index);
+
+            setIndexOfSelectedPost(index)
 
 
 
-        } catch (error) {
+            setPosts(data)
+            console.log(data);
+        }
+
+
+
+
+
+        catch (error) {
             console.error('Error:', error)
         }
+    }
+
+    function handleNextButton() {
+
+        setNextPost(posts[indexOfSelectedPost + 1])
+
     }
 
 
@@ -43,9 +61,12 @@ export default function PostPage() {
 
 
         <>
-            <div key={post.id} id-post={post.id} className="bg-light-subtle my-4 p-4 rounded-5">
+
+
+
+            <div key={posts[indexOfSelectedPost].id} id-post={posts[indexOfSelectedPost].id} className="bg-light-subtle my-4 p-4 rounded-5">
                 <div className="d-flex justify-content-between" >
-                    <h3>{post.title}</h3>
+                    <h3>{posts[indexOfSelectedPost].title}</h3>
 
 
                 </div>
@@ -57,18 +78,24 @@ export default function PostPage() {
                     </div>
 
                     <div className='m-4'>
-                        <p key={post.id}><strong>Contenuto: </strong>{post.content}</p>
+                        <p key={posts[indexOfSelectedPost].id}><strong>Contenuto: </strong>{posts[indexOfSelectedPost].content}</p>
 
-                        <p><strong>Tags: </strong>{post.tags}</p>
+                        <p><strong>Tags: </strong>{posts[indexOfSelectedPost].tags}</p>
 
-                        {post.published && <p>Pubblicato ✅</p>}
+                        {posts[indexOfSelectedPost].published && <p>Pubblicato ✅</p>}
 
                     </div>
 
                 </div>
 
+                <button onClick={handleNextButton}>next</button>
 
-            </div>
+
+            </div >
+
+
+
+
 
 
         </>

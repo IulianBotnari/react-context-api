@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 
 import Style from './AppPost.module.css'
-import React from 'react'
+// import React from 'react'
 import { useGlobalContext } from '../../Context/GlobalContext'
 
 export default function AppPost() {
@@ -73,12 +73,6 @@ export default function AppPost() {
     }
 
 
-    function handNewPageID() {
-
-
-
-    }
-
 
 
     return (
@@ -88,7 +82,7 @@ export default function AppPost() {
 
                 <div key={index} id-post={post.id} className="bg-light-subtle my-4 p-4 rounded-5">
                     <div className="d-flex justify-content-between" >
-                        <Link to={`/post/${post.id}`} onClick={handNewPageID}>
+                        <Link to={`/post/${post.id}`}>
                             <h3>{post.title}</h3>
                         </Link>
                         <button type="button" className="btn btn-danger" id-post-btn={post.id} onClick={handleDeletePost}>Delete</button>
